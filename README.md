@@ -1,4 +1,4 @@
-# pgtl-4-php
+# Programmiertechnik Labor PHP 4. Klasse
 
 ## Datenbank Verbindng öffnen
 
