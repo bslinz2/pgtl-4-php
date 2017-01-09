@@ -8,12 +8,13 @@ database.php
 ```php
 <?php
 
+// Datenbankverbidnung aufbauen
 $connection = new MySqli('localhost', 'root', '', 'cinema');
-$connection->set_charset('utf8');
+$connection->set_charset('utf8'); // Setzen der Encoding auf utf8, damit Umlaute nicht kaputt sind.  
 ```
 
 ----
-## Alle Zeilen einer SQL Anweisung Ausgeben (SELECT)
+## Alle Zeilen einer SQL Anweisung Ausgeben
 ```
 index.php
 ```
@@ -22,7 +23,9 @@ index.php
 <?php
     require "database.php";
     $sql = "SELECT * FROM movie";
-    $result = $connection->query($sql);
+    $stmt = $connection->prepare($sql); 
+    $stmt->execute();
+    $result = $stmt->get_result();
     $rows = $result->fetch_all(MYSQL_ASSOC);
 ?>
 <table>
