@@ -42,4 +42,58 @@ index.php
 
 ```
 ----
-# 
+# Neuen Eintrag hinzufügen
+```
+insert.php
+```
+```php
+<?php
+    require "database.php";
+
+    if(isset($_POST['mov_name'])) {
+
+        $sql = 'INSERT INTO movie
+            (mov_name, mov_startDate, dir_id, gen_id)
+            VALUES (?, ?, ?, ?)';
+
+        $stmt = $connection->prepare($sql);
+
+        $stmt->bind_param('ssii',
+            $_POST['mov_name'],
+            $_POST['mov_startDate'],
+            $_POST['dir_id'],
+            $_POST['gen_id']
+        );
+
+        $stmt->execute();
+        $movieId = $stmt->insert_id;
+        $actors = $_POST['act_id'];
+
+        foreach($actors as $actorId) {
+            $sql = 'INSERT INTO actor_movie
+                (mov_id, act_id)
+                VALUES (?, ?)';
+
+            $stmt = $connection->prepare($sql);
+            $stmt->bind_param('ii', $movieId, $actorId);
+            $stmt->execute();
+        }
+    }
+?>
+
+<h1>Neuen Film hinzufügen</h1>
+
+<form method="POST">
+    <div>
+        <p>Name</p>
+        <input type="text" name="mov_name" required />
+    </div>
+
+    <div>
+        <p>Kinostart</p>
+        <input type="datetime-local" name="mov_startDate" required />
+    </div>
+
+    <input type="submit" name="save" title="Speichern" />
+</form>
+```
