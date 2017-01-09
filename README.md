@@ -66,18 +66,6 @@ insert.php
         );
 
         $stmt->execute();
-        $movieId = $stmt->insert_id;
-        $actors = $_POST['act_id'];
-
-        foreach($actors as $actorId) {
-            $sql = 'INSERT INTO actor_movie
-                (mov_id, act_id)
-                VALUES (?, ?)';
-
-            $stmt = $connection->prepare($sql);
-            $stmt->bind_param('ii', $movieId, $actorId);
-            $stmt->execute();
-        }
     }
 ?>
 
