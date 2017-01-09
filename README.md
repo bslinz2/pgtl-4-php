@@ -20,7 +20,7 @@ index.php
 ```php
 
 <?php
-    require "database.php"; // verwendes des 
+    require "database.php";
     $sql = "SELECT * FROM movie";
     $result = $connection->query($sql);
     $rows = $result->fetch_all(MYSQL_ASSOC);
