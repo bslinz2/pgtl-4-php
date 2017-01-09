@@ -20,7 +20,7 @@ index.php
 ```php
 
 <?php
-    require "database.php";
+    require "database.php"; // verwendes des 
     $sql = "SELECT * FROM movie";
     $result = $connection->query($sql);
     $rows = $result->fetch_all(MYSQL_ASSOC);
@@ -41,3 +41,5 @@ index.php
 </table>
 
 ```
+----
+# 
