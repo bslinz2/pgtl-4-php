@@ -13,7 +13,7 @@ $connection->set_charset('utf8');
 ```
 
 ----
-## Alle Zeilen einer SQL Anweisungausgeben (SELECT)
+## Alle Zeilen einer SQL Anweisung Ausgeben (SELECT)
 ```
 index.php
 ```
