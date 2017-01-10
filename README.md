@@ -26,7 +26,7 @@ index.php
     $stmt = $connection->prepare($sql); 
     $stmt->execute();
     $result = $stmt->get_result();
-    $rows = $result->fetch_all(MYSQL_ASSOC);
+    $rows = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 <table>
   <tr>
