@@ -69,6 +69,7 @@ insert.php
         );
 
         $stmt->execute();
+        $insertId = $stmt->insert_id;
     }
 ?>
 
