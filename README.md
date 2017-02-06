@@ -9,8 +9,14 @@ database.php
 <?php
 
 // Datenbankverbidnung aufbauen
-$connection = new MySqli('localhost', 'root', '', 'cinema');
-$connection->set_charset('utf8'); // Setzen der Encoding auf utf8, damit Umlaute nicht kaputt sind.  
+// @ -> Keine Fehlermeldung dem user zeigen!
+@$connection = new MySqli('localhost', 'root', '', 'cinema');
+// Wenn ein Fehler beim Verbindungsaufbau ist -> abbrechen mit 500 internal server error
+if ($connection->connect_errno) {
+    header("HTTP/1.1 500 Internal Server Error");
+    die();
+}
+$connection->set_charset('utf8'); // Setzen der Encoding auf utf8, damit Umlaute nicht kaputt sind.
 ```
 
 ----
@@ -123,7 +129,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
     Zimmertyp:
     <select name="typ">
         <?php foreach($rows as $row): ?>
-            <option value='<?=$row["id"]?>'><?=$row["zimmer_typ"]?></option>";
+            <option value='<?php echo $row["id"]?>'><?php echo $row["zimmer_typ"]?></option>";
         <?php endforeach; ?>
     </select>
 
