@@ -93,7 +93,7 @@ insert.php
 
 ## % Escapen
 
-```
+```php
 $searchString = $connection->real_escape_string($_POST["parameter"]);
 $searchString = str_replace("%", "\\%", $searchString);
 $searchString = str_replace("_", "\\_", $searchString);
@@ -110,7 +110,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 
 ## Select mit Optionen
 
-```
+```php
 <?php
 $sql = "select * from zimmertyp";
 $stmt = $connection->prepare($sql);
