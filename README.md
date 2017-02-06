@@ -89,3 +89,44 @@ insert.php
     <input type="submit" name="save" title="Speichern" />
 </form>
 ```
+
+
+## % Escapen
+
+```
+$searchString = $connection->real_escape_string($_POST["parameter"]);
+$searchString = str_replace("%", "\\%", $searchString);
+$searchString = str_replace("_", "\\_", $searchString);
+
+$bind = "%" . $searchString . "%";
+
+$sql = "SELECT * FROM dual where col like ?";
+$stmt = $connection->prepare($sql);
+$stmt->bind_param("s", $bind);
+$stmt->execute();
+$result = $stmt->get_result();
+$rows = $result->fetch_all(MYSQLI_ASSOC);
+```
+
+## Select mit Optionen
+
+```
+<?php
+$sql = "select * from zimmertyp";
+$stmt = $connection->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+$rows = $result->fetch_all(MYSQLI_ASSOC);
+?>
+
+<form method="get" action="zimmertypen.php">
+    Zimmertyp:
+    <select name="typ">
+        <?php foreach($rows as $row): ?>
+            <option value='<?=$row["id"]?>'><?=$row["zimmer_typ"]?></option>";
+        <?php endforeach; ?>
+    </select>
+
+    <input type="submit">Submit</input>
+</form>
+```
