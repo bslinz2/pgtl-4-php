@@ -66,9 +66,12 @@ insert.php
             VALUES (?, ?, ?, ?)';
 
         $stmt = $connection->prepare($sql);
-
+        
+        //damit wir beispielsweise keine <script> tags zulassen
+        $movName = htmlentities($_POST['mov_name']);
+        
         $stmt->bind_param('ssii',
-            $_POST['mov_name'],
+            $movName,
             $_POST['mov_startDate'],
             $_POST['dir_id'],
             $_POST['gen_id']
