@@ -100,7 +100,7 @@ insert.php
 ```
 
 
-## % Escapen
+## % und _ Escapen
 
 ```php
 $searchString = $connection->real_escape_string($_POST["parameter"]);
@@ -121,19 +121,19 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 
 ```php
 <?php
-    $sql = "select * from zimmertyp";
+    $sql = "SELECT * FROM zimmertyp";
     $stmt = $connection->prepare($sql);
     $stmt->execute();
     $result = $stmt->get_result();
     $rows = $result->fetch_all(MYSQLI_ASSOC);
 ?>
 
-<form method="get" action="zimmertypen.php">
+<form method="post" action="zimmertypen.php">
     Zimmertyp:
     <select name="typ">
         <?php foreach($rows as $row): ?>
-            <option value='<?php echo $row["id"]?>'>
-                <?php echo $row["zimmer_typ"]?>
+            <option value="<?php echo $row['id']?>">
+                <?php echo $row['zimmer_typ']?>
             </option>;
         <?php endforeach; ?>
     </select>
