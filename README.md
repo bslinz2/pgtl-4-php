@@ -28,7 +28,10 @@ index.php
 
 <?php
     require "database.php";
-    $sql = "SELECT * FROM movie";
+    $sql = "SELECT mov_id,
+                   mov_name,
+                   date_format(mov_startdate, '%e. %M %Y')
+              FROM movie";
     $stmt = $connection->prepare($sql); 
     $stmt->execute();
     $result = $stmt->get_result();
